@@ -1,0 +1,24 @@
+'VBA function to send HTTP POST to a server:
+
+Function httpPost$(url$, msg$)
+    With CreateObject("WinHttp.WinHttpRequest.5.1")
+        .Open "POST", url, False
+        .setRequestHeader "User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)"
+        .setRequestHeader "Content-type", "application/x-www-form-urlencoded"
+        '.setRequestHeader "secret-pass-key", "your-key"    <--if needed
+        .send msg
+        httpPost = .responseText
+    End With
+End Function
+
+'-------------------------------------------------------------------------------------------
+
+'Example usage:
+response = httpPost(url, msg)
+
+'-------------------------------------------------------------------------------------------
+
+'Note: This same setup can be used for an HTTP PUT. Just change "POST" to "PUT".
+'
+'
+'
